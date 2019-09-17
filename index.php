@@ -13,6 +13,12 @@ if(isset($_POST['btn_login'])) {
     
     $row=$select->fetch(PDO::FETCH_ASSOC); 
     if($row['useremail']==$useremail AND $row['password']==$password AND $row['role']=="Admin") {
+
+        $_SESSION['userid'] = $row['userid'];
+        $_SESSION['username'] = $row['username'];
+        $_SESSION['useremail'] = $row['useremail'];
+        $_SESSION['role'] = $row['role'];
+//        print_r($_SESSION); 
         echo $success = 'Login Successfully';
         
         header('refresh:1;dashboard.php'); 
