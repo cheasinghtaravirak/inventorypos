@@ -23,6 +23,11 @@ if(isset($_POST['btn_login'])) {
         
         header('refresh:1;dashboard.php'); 
     }else if($row['useremail']==$useremail AND $row['password']==$password AND $row['role']=="User") {
+        
+        $_SESSION['userid'] = $row['userid'];
+        $_SESSION['username'] = $row['username'];
+        $_SESSION['useremail'] = $row['useremail'];
+        $_SESSION['role'] = $row['role'];
         header('refresh:1;user.php');
     } else {
         echo 'Login Fail';
