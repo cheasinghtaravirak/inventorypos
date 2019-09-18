@@ -64,8 +64,6 @@ if(isset($_POST['btn_login'])) {
         header('refresh:1;user.php');
     } 
     
-    
-    
 }
 
 ?>
@@ -120,7 +118,7 @@ if(isset($_POST['btn_login'])) {
       </div>
       <div class="row">
         <div class="col-xs-8">
-         <a href="#">I forgot my password</a><br>
+         <a href="#" onclick="swal('To Get Password', 'Please contact administrator OR service provider.', 'error');">I forgot my password</a><br>
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
@@ -131,7 +129,6 @@ if(isset($_POST['btn_login'])) {
     </form>
 
     
-
   </div>
   <!-- /.login-box-body -->
 </div>
