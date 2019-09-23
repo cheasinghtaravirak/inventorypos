@@ -2,7 +2,18 @@
 include_once'connectdb.php'; 
 
 session_start();
-include_once'header.php';
+
+if($_SESSION['useremail']=="") {
+    header('location:index.php');
+}
+
+if($_SESSION['role'] == "Admin") {
+    include_once'header.php';
+} else {
+    include_once'headeruser.php';
+}
+
+
 
 //when click on update password button, we get values from user into variables 
 if(isset($_POST['btnupdate'])) {
