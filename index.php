@@ -13,7 +13,6 @@ if(isset($_POST['btn_login'])) {
     $useremail = $_POST['txt_useremail']; 
     $password = $_POST['txt_password'];
     
-//    echo $useremail.$password; 
     
     $select = $pdo->prepare("select * from tbl_user where useremail='$useremail' AND password = '$password'");
     $select->execute(); 
@@ -62,7 +61,20 @@ if(isset($_POST['btn_login'])) {
         ';
         
         header('refresh:1;user.php');
-    } 
+    } else {
+        echo '
+        <script type="text/javascript">
+            jQuery(function validation() {
+                swal({
+                  title: "Warning: email or password is incorrect.",
+                  text: "Details Not Matched",
+                  icon: "error",
+                  button: "Ok",
+                });
+            });
+        </script>
+        ';
+    }
     
 }
 
