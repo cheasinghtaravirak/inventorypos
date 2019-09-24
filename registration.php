@@ -26,33 +26,34 @@ include_once'header.php';
         | Your Page Content Here |
         -------------------------->
           <!-- general form elements -->
-          <div class="box box-primary">
+          <div class="box box-info">
             <div class="box-header with-border">
               <h3 class="box-title">Registration Form</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form">
+            <form role="form" action="" method="post">
               <div class="box-body">
               
                 <div class="col-md-4">
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Name</label>
-                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter name">
+                      <label>Name</label>
+                      <input type="text" class="form-control" name="txtname" placeholder="Enter name">
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Email address</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                      <label>Email address</label>
+                      <input type="email" class="form-control" name="txtemail" placeholder="Enter email">
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputPassword1">Password</label>
-                      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                      <label>Password</label>
+                      <input type="password" class="form-control" name="txtpassword" placeholder="Password">
                     </div>
                     <div class="form-group">
                       <label>Role</label>
-                      <select class="form-control">
-                        <option>Admin</option>
+                      <select class="form-control" name="txtselect_option">
+                        <option value="" disabled selected>Select role</option>
                         <option>User</option>
+                        <option>Admin</option>
                       </select>
                     </div>
                 </div>
@@ -65,6 +66,7 @@ include_once'header.php';
                                 <th>EMAIL</th>
                                 <th>PASSWORD</th>
                                 <th>ROLE</th>
+                                <th>DELETE</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -83,15 +85,6 @@ include_once'header.php';
                                 ';
                             }
                             ?>
-<!--
-                            <tr>
-                                <td>'.$row->userid.'</td>
-                                <td>'.$row->username.'</td>
-                                <td>'.$row->useremail.'</td>
-                                <td>'.$row->password.'</td>
-                                <td>'.$row->role.'</td>
-                            </tr>
--->
                         </tbody>
                     </table>
                 </div>
@@ -100,7 +93,7 @@ include_once'header.php';
               <!-- /.box-body -->
 
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-info">Save</button>
               </div>
             </form>
           </div>
