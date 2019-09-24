@@ -2,8 +2,27 @@
 include_once'connectdb.php'; 
 
 session_start();
-
 include_once'header.php';
+
+if(isset($_POST['btnsave'])) {
+    $username = $_POST['txtname'];
+    $useremail = $_POST['txtemail'];
+    $password = $_POST['txtpassword'];
+    $userrole = $_POST['txtselect_option'];   
+    $insert = $pdo->prepare("insert into tbl_user(username, useremail, password, role) values (:name, :email, :pass, :role)"); 
+    $insert->bindParam(':name', $username); 
+    $insert->bindParam(':email', $useremail); 
+    $insert->bindParam(':pass', $password); 
+    $insert->bindParam(':role', $userrole); 
+    
+    if($insert->execute()) {
+        echo "Insert Successfully";
+    } else {
+        echo "Insert Fail"; 
+    }
+    
+}
+
 ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -56,6 +75,7 @@ include_once'header.php';
                         <option>Admin</option>
                       </select>
                     </div>
+                    <button type="submit" class="btn btn-info" name="btnsave">Save</button>
                 </div>
                 <div class="col-md-8">
                     <table class="table table-striped">
@@ -93,7 +113,6 @@ include_once'header.php';
               <!-- /.box-body -->
 
               <div class="box-footer">
-                <button type="submit" class="btn btn-info">Save</button>
               </div>
             </form>
           </div>
