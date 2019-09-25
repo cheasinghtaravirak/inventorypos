@@ -9,18 +9,58 @@ if(isset($_POST['btnsave'])) {
     $useremail = $_POST['txtemail'];
     $password = $_POST['txtpassword'];
     $userrole = $_POST['txtselect_option'];   
-    $insert = $pdo->prepare("insert into tbl_user(username, useremail, password, role) values (:name, :email, :pass, :role)"); 
-    $insert->bindParam(':name', $username); 
-    $insert->bindParam(':email', $useremail); 
-    $insert->bindParam(':pass', $password); 
-    $insert->bindParam(':role', $userrole); 
     
-    if($insert->execute()) {
-        echo "Insert Successfully";
-    } else {
-        echo "Insert Fail"; 
+    if(isset($_POST['txtemail'])) {
+        $select = $pdo->prepare("select useremail from tbl_user where useremail='$useremail'"); 
+        $select->execute(); 
+        if($select->rowCount() > 0) {
+            echo '
+            <script type="text/javascript">
+                jQuery(function validation() {
+                    swal({
+                      title: "Warning!",
+                      text: "Email already exists. Please use a different email.",
+                      icon: "warning",
+                      button: "Ok",
+                    });
+                });
+            </script>';
+            
+        } else {
+            $insert = $pdo->prepare("insert into tbl_user(username, useremail, password, role) values (:name, :email, :pass, :role)"); 
+            $insert->bindParam(':name', $username); 
+            $insert->bindParam(':email', $useremail); 
+            $insert->bindParam(':pass', $password); 
+            $insert->bindParam(':role', $userrole);
+            
+            if($insert->execute()) {
+                echo '
+                <script type="text/javascript">
+                    jQuery(function validation() {
+                        swal({
+                          title: "Good Job!!!",
+                          text: "Register Successfully",
+                          icon: "success",
+                          button: "Ok",
+                        });
+                    });
+                </script>';
+            } else {
+                echo '
+                <script type="text/javascript">
+                    jQuery(function validation() {
+                        swal({
+                          title: "Error!",
+                          text: "Registration Fails",
+                          icon: "error",
+                          button: "Ok",
+                        });
+                    });
+                </script>';
+            }
+        }
     }
-    
+      
 }
 
 ?>
@@ -57,19 +97,19 @@ if(isset($_POST['btnsave'])) {
                 <div class="col-md-4">
                     <div class="form-group">
                       <label>Name</label>
-                      <input type="text" class="form-control" name="txtname" placeholder="Enter name">
+                      <input type="text" class="form-control" name="txtname" placeholder="Enter name" required>
                     </div>
                     <div class="form-group">
                       <label>Email address</label>
-                      <input type="email" class="form-control" name="txtemail" placeholder="Enter email">
+                      <input type="email" class="form-control" name="txtemail" placeholder="Enter email" required>
                     </div>
                     <div class="form-group">
                       <label>Password</label>
-                      <input type="password" class="form-control" name="txtpassword" placeholder="Password">
+                      <input type="password" class="form-control" name="txtpassword" placeholder="Password" required>
                     </div>
                     <div class="form-group">
                       <label>Role</label>
-                      <select class="form-control" name="txtselect_option">
+                      <select class="form-control" name="txtselect_option" required>
                         <option value="" disabled selected>Select role</option>
                         <option>User</option>
                         <option>Admin</option>
