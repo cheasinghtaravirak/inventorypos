@@ -2,12 +2,16 @@
 include_once'connectdb.php'; 
 
 session_start();
+
+if($_SESSION['useremail']=="" OR $_SESSION['role']=='User') {
+    header('location:index.php');
+}
+
 include_once'header.php';
 
 error_reporting(0); 
 
 $id = $_GET['id']; 
-//$delete = $pdo->prepare("delete from tbl_user where userid='$id'");
 $delete = $pdo->prepare("delete from tbl_user where id=".$id);
 if($delete->execute()) {
     echo '
