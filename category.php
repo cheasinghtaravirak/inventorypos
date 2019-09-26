@@ -4,6 +4,55 @@ session_start();
 
 include_once'header.php';
 
+if(isset($_POST['btnsave'])) {
+    $category = $_POST['txtcategory'];
+    if(empty($category)) {
+        $error =  '
+                <script type="text/javascript">
+                    jQuery(function validation() {
+                        swal({
+                          title: "Field is empty!!!",
+                          text: "Please fill in the field.",
+                          icon: "error",
+                          button: "Ok",
+                        });
+                    });
+                </script>';
+        echo $error; 
+    }
+    
+    if(!isset($error)) {
+        $insert = $pdo->prepare("insert into tbl_category(category) values(:category)"); 
+        $insert->bindParam(':category', $category); 
+        if($insert->execute()) {
+            echo '
+            <script type="text/javascript">
+                jQuery(function validation() {
+                    swal({
+                      title: "Good Job!!!",
+                      text: "The category is added successfully.",
+                      icon: "success",
+                      button: "Ok",
+                    });
+                });
+            </script>'; 
+        } else {
+            echo '
+            <script type="text/javascript">
+                jQuery(function validation() {
+                    swal({
+                      title: "Error!",
+                      text: "The category is not added.",
+                      icon: "error",
+                      button: "Ok",
+                    });
+                });
+            </script>';
+        }
+    }
+    
+}
+
 ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
