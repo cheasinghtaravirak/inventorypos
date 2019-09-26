@@ -101,7 +101,23 @@ if(isset($_POST['btnsave'])) {
                             </tr>
                         </thead>
                         <tbody>
-                           <tr></tr>
+                        <?php
+                            $select = $pdo->prepare("select * from tbl_category order by catid desc"); 
+                            $select->execute(); 
+                            while($row = $select->fetch(PDO::FETCH_OBJ)) {
+                                echo '
+                                   <tr>
+                                       <td>'.$row->catid.'</td>
+                                       <td>'.$row->category.'</td>
+                                       <td>
+                                        <button type="submit" value="'.$row->catid.'" class="btn btn-success" name="btnedit">Edit</button>
+                                       </td>
+                                       <td>
+                                        <button type="submit" value="'.$row->catid.'" class="btn btn-danger" name="btndelete">Delete</button>
+                                       </td>
+                                   </tr>'; 
+                            }
+                        ?> 
                         </tbody> 
                     </table>
                 </div>
