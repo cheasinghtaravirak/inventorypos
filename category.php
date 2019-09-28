@@ -29,7 +29,7 @@ if(isset($_POST['btnsave'])) {
             <script type="text/javascript">
                 jQuery(function validation() {
                     swal({
-                      title: "Good Job!!!",
+                      title: "Added!!!",
                       text: "The category is added successfully.",
                       icon: "success",
                       button: "Ok",
@@ -82,7 +82,7 @@ if(isset($_POST['btnupdate'])) {
             <script type="text/javascript">
                 jQuery(function validation() {
                     swal({
-                      title: "Good Job!!!",
+                      title: "Updated!!!",
                       text: "The category is updated successfully.",
                       icon: "success",
                       button: "Ok",
@@ -106,6 +106,36 @@ if(isset($_POST['btnupdate'])) {
     }
     
 } //btnupdate codes end here 
+
+//Codes for delete button
+if(isset($_POST['btndelete'])) {
+    $delete = $pdo->prepare("delete from tbl_category where catid=".$_POST['btndelete']);
+    if($delete->execute()) {
+        echo '
+        <script type="text/javascript">
+            jQuery(function validation() {
+                swal({
+                  title: "Deleted!!!",
+                  text: "The category is deleted successfully.",
+                  icon: "success",
+                  button: "Ok",
+                });
+            });
+        </script>';
+    } else {
+        echo '
+        <script type="text/javascript">
+            jQuery(function validation() {
+                swal({
+                  title: "Error!",
+                  text: "The category is not deleted.",
+                  icon: "error",
+                  button: "Ok",
+                });
+            });
+        </script>'; 
+    }
+}
 
 ?>
   <!-- Content Wrapper. Contains page content -->
