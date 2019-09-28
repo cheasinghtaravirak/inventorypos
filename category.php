@@ -51,7 +51,61 @@ if(isset($_POST['btnsave'])) {
         }
     }
     
-}
+} // Codes for add new category ends here 
+
+//Codes for update button
+if(isset($_POST['btnupdate'])) {
+    
+    $category = $_POST['txtcategory']; 
+    $id = $_POST['txtid']; 
+    
+    if(empty($category)) {
+        $errorupdate = '
+                <script type="text/javascript">
+                    jQuery(function validation() {
+                        swal({
+                          title: "Field is empty!!!",
+                          text: "Please fill in the field.",
+                          icon: "error",
+                          button: "Ok",
+                        });
+                    });
+                </script>';
+        echo $errorupdate;
+    }
+    if(!isset($errorupdate)) {
+        $update = $pdo->prepare("update tbl_category set category=:category where catid=".$id);
+//        $update = $pdo->prepare("update tbl_category set category='$category' where catid=".$id);
+        $update->bindParam(':category', $category); 
+        if($update->execute()) {
+            echo '
+            <script type="text/javascript">
+                jQuery(function validation() {
+                    swal({
+                      title: "Good Job!!!",
+                      text: "The category is updated successfully.",
+                      icon: "success",
+                      button: "Ok",
+                    });
+                });
+            </script>'; 
+        } else {
+            echo '
+            <script type="text/javascript">
+                jQuery(function validation() {
+                    swal({
+                      title: "Error!",
+                      text: "The category is not updated.",
+                      icon: "error",
+                      button: "Ok",
+                    });
+                });
+            </script>'; 
+        }
+            
+    }
+    
+} //btnupdate codes end here 
 
 ?>
   <!-- Content Wrapper. Contains page content -->
