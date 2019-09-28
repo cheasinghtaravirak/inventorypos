@@ -81,52 +81,78 @@ if(isset($_POST['btnsave'])) {
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" action="" method="post">
+            
               <div class="box-body">
-                <div class="col-md-4">
-                    <div class="form-group">
-                      <label>Category</label>
-                      <input type="text" class="form-control" name="txtcategory" placeholder="Enter category">
-                    </div>
-                    <button type="submit" class="btn btn-warning" name="btnsave">Save</button>
-                </div>
-                <div class="col-md-8">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>CATEGORY</th>
-                                <th>EDIT</th>
-                                <th>DELETE</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-                            $select = $pdo->prepare("select * from tbl_category order by catid desc"); 
+                <form role="form" action="" method="post">
+                   
+                   <?php 
+                        if(isset($_POST['btnedit'])) {
+                            $select = $pdo->prepare("select * from tbl_category where catid=".$_POST['btnedit']);
                             $select->execute(); 
-                            while($row = $select->fetch(PDO::FETCH_OBJ)) {
+                            if($select) {
+                                $row = $select->fetch(PDO::FETCH_OBJ); 
                                 echo '
-                                   <tr>
-                                       <td>'.$row->catid.'</td>
-                                       <td>'.$row->category.'</td>
-                                       <td>
-                                        <button type="submit" value="'.$row->catid.'" class="btn btn-success" name="btnedit">Edit</button>
-                                       </td>
-                                       <td>
-                                        <button type="submit" value="'.$row->catid.'" class="btn btn-danger" name="btndelete">Delete</button>
-                                       </td>
-                                   </tr>'; 
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                          <label>Category</label>
+                                          <input type="hidden" class="form-control" value="'.$row->catid.'" name="txtid" placeholder="Enter category">
+                                          <input type="text" class="form-control" value="'.$row->category.'" name="txtcategory" placeholder="Enter category">
+                                        </div>
+                                        <button type="submit" class="btn btn-info" name="btnupdate">Update</button>
+                                    </div>';
                             }
-                        ?> 
-                        </tbody> 
-                    </table>
-                </div>
+                            
+                            
+                        } else {
+                            echo '
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                      <label>Category</label>
+                                      <input type="text" class="form-control" name="txtcategory" placeholder="Enter category">
+                                    </div>
+                                    <button type="submit" class="btn btn-warning" name="btnsave">Save</button>
+                                </div>';
+                        }
+                    ?>
+                    <div class="col-md-8">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>CATEGORY</th>
+                                    <th>EDIT</th>
+                                    <th>DELETE</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                                $select = $pdo->prepare("select * from tbl_category order by catid desc"); 
+                                $select->execute(); 
+                                while($row = $select->fetch(PDO::FETCH_OBJ)) {
+                                    echo '
+                                       <tr>
+                                           <td>'.$row->catid.'</td>
+                                           <td>'.$row->category.'</td>
+                                           <td>
+                                            <button type="submit" value="'.$row->catid.'" class="btn btn-success" name="btnedit">Edit</button>
+                                           </td>
+                                           <td>
+                                            <button type="submit" value="'.$row->catid.'" class="btn btn-danger" name="btndelete">Delete</button>
+                                           </td>
+                                       </tr>'; 
+                                }
+                            ?> 
+                            </tbody> 
+                        </table>
+                    </div>
+                </form>
               </div>
               <!-- /.box-body -->
 
               <div class="box-footer">
+
               </div>
-            </form>
+
           </div>
     </section>
     <!-- /.content -->
