@@ -25,9 +25,9 @@ include_once'header.php';
         | Your Page Content Here |
         -------------------------->
       <!-- general form elements -->
-      <div class="box box-success">
+      <div class="box box-info">
         <div class="box-header with-border">
-          <h3 class="box-title">Product Form</h3>
+          <h3 class="box-title"><a href="productlist.php" class="btn btn-primary" role="button">Back to Product List</a></h3>
         </div>
         <!-- /.box-header -->
         <!-- form start -->
@@ -80,6 +80,9 @@ include_once'header.php';
                     </div>
                 </div>
             </form>
+          </div>
+          <div class="box-footer">
+                <button type="submit" class="btn btn-info" name="btnaddproduct">Add product</button>
           </div>
         </div>
    
