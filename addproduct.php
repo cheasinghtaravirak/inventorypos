@@ -24,7 +24,6 @@ if(isset($_POST['btnaddproduct'])) {
     //check for file extension 
     if($f_extension=='jpg' || $f_extension=='jpeg' || $f_extension=='png' || $f_extension=='gif'){
         if($f_size>=1000000 ){
-//            echo 'Max file should be 1MB';
             $error =  '
             <script type="text/javascript">
                 jQuery(function validation() {
