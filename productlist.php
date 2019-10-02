@@ -35,7 +35,7 @@ include_once'header.php';
                 <!-- form start -->
 
             <div class="box-body">
-                <table class="table table-striped">
+                <table id="producttable" class="table table-striped">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -65,22 +65,20 @@ include_once'header.php';
                                     <td>'.$row->saleprice.'</td>
                                     <td>'.$row->pstock.'</td>
                                     <td>'.$row->pdescription.'</td>
-                                    <td>'.$row->pimage.'</td>
+                                    <td><img src="productimages/'.$row->pimage.'" class="img-rounded" width="40px" height="40px"></td>
                                     <td>
-                                        <a href="registration.php?id='.$row->pid.'" class="btn btn-success" name="btndelete"><span class="glyphicon glyphicon-pencil" title="delete"></span></a> 
+                                        <a href="viewproduct.php?id='.$row->pid.'" class="btn btn-success" role="button"><span class="glyphicon glyphicon-eye-open" style="color:#ffffff" data-toggle="tooltip" title="View Product"></span></a> 
                                     </td>
                                     <td>
-                                        <a href="registration.php?id='.$row->pid.'" class="btn btn-success" name="btndelete"><span class="glyphicon glyphicon-pencil" title="delete"></span></a> 
+                                        <a href="editproduct.php?id='.$row->pid.'" class="btn btn-info" role="button"><span class="glyphicon glyphicon-edit" style="color:#ffffff" data-toggle="tooltip" title="Edit Product"></span></a> 
                                     </td>
                                     <td>
-                                        <a href="registration.php?id='.$row->pid.'" class="btn btn-danger" name="btndelete"><span class="glyphicon glyphicon-trash" title="delete"></span></a> 
+                                        <a href="deleteproduct.php?id='.$row->pid.'" class="btn btn-danger" role="button"><span class="glyphicon glyphicon-trash" style="color:#ffffff" data-toggle="tooltip" title="Delete Product"></span></a> 
                                     </td>
                                 </tr>
                             ';
                         }
                         ?>
-
-
                     </tbody> 
                 </table>
             </div>
@@ -91,6 +89,20 @@ include_once'header.php';
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+<script>
+$(document).ready( function () {
+    $('#producttable').DataTable({
+        "order": [[0, "desc"]]
+    });
+} );
+</script>
+
+<script>
+$(document).ready( function () {
+    $('[data-toggle="tooltip"]').tooltip(); 
+} );
+</script>
+
 <?php
 include_once'footer.php';
 ?>
