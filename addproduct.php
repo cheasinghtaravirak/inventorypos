@@ -41,6 +41,42 @@ if(isset($_POST['btnaddproduct'])) {
            if(move_uploaded_file($f_tmp,$store)){
                //new file to store in the database (its name is id number)
                $productimage = $f_newfile; 
+                if(!isset($errorr)) {
+                    $insert = $pdo->prepare("insert into tbl_product(pname, pcategory, purchaseprice, saleprice, pstock, pdescription, pimage) values(:pname, :pcategory, :purchaseprice, :saleprice, :pstock, :pdescription, :pimage)"); 
+                    $insert->bindParam(':pname', $productname); 
+                    $insert->bindParam(':pcategory', $category); 
+                    $insert->bindParam(':purchaseprice', $purchaseprice); 
+                    $insert->bindParam(':saleprice', $saleprice); 
+                    $insert->bindParam(':pstock', $stock); 
+                    $insert->bindParam(':pdescription', $description); 
+                    $insert->bindParam(':pimage', $productimage); 
+
+                    if($insert->execute()) {
+                        echo '
+                        <script type="text/javascript">
+                            jQuery(function validation() {
+                                swal({
+                                  title: "Added!!!",
+                                  text: "The product is added successfully.",
+                                  icon: "success",
+                                  button: "Ok",
+                                });
+                            });
+                        </script>';
+                    } else {
+                        echo '
+                        <script type="text/javascript">
+                            jQuery(function validation() {
+                                swal({
+                                  title: "Error!",
+                                  text: "The product is not added.",
+                                  icon: "error",
+                                  button: "Ok",
+                                });
+                            });
+                        </script>'; 
+                    }
+                }
            } 
         }   
     }else {
@@ -56,43 +92,6 @@ if(isset($_POST['btnaddproduct'])) {
             });
         </script>'; 
         echo $error; 
-    }
-    
-    if(!isset($errorr)) {
-        $insert = $pdo->prepare("insert into tbl_product(pname, pcategory, purchaseprice, saleprice, pstock, pdescription, pimage) values(:pname, :pcategory, :purchaseprice, :saleprice, :pstock, :pdescription, :pimage)"); 
-        $insert->bindParam(':pname', $productname); 
-        $insert->bindParam(':pcategory', $category); 
-        $insert->bindParam(':purchaseprice', $purchaseprice); 
-        $insert->bindParam(':saleprice', $saleprice); 
-        $insert->bindParam(':pstock', $stock); 
-        $insert->bindParam(':pdescription', $description); 
-        $insert->bindParam(':pimage', $productimage); 
-        
-        if($insert->execute()) {
-            echo '
-            <script type="text/javascript">
-                jQuery(function validation() {
-                    swal({
-                      title: "Added!!!",
-                      text: "The product is added successfully.",
-                      icon: "success",
-                      button: "Ok",
-                    });
-                });
-            </script>';
-        } else {
-            echo '
-            <script type="text/javascript">
-                jQuery(function validation() {
-                    swal({
-                      title: "Error!",
-                      text: "The product is not added.",
-                      icon: "error",
-                      button: "Ok",
-                    });
-                });
-            </script>'; 
-        }
     }
     
 }
