@@ -4,6 +4,24 @@ include_once'connectdb.php';
 session_start();
 
 include_once'header.php';
+
+$id=$_GET['id']; 
+
+$select = $pdo->prepare("select * from tbl_product where pid = $id"); 
+$select->execute(); 
+
+$row = $select->fetch(PDO::FETCH_ASSOC); 
+//values from database 
+$id_db = $row['pid']; 
+$productname_db = $row['pname'];
+$category_db = $row['pcategory'];
+$purchaseprice_db = $row['purchaseprice'];
+$saleprice_db = $row['saleprice'];
+$stock_db = $row['pstock'];
+$description_db = $row['pdescription'];
+$productimage_db = $row['pimage'];
+
+print_r($row);
 ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
