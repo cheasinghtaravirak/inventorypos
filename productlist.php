@@ -65,7 +65,7 @@ include_once'header.php';
                                     <td>'.$row->saleprice.'</td>
                                     <td>'.$row->pstock.'</td>
                                     <td>'.$row->pdescription.'</td>
-                                    <td><img src="productimages/'.$row->pimage.'" class="img-rounded" width="40px" height="40px"></td>
+                                    <td><img src="productimages/'.$row->pimage.'" class="img-rounded" width="40px" height="40px"/></td>
                                     <td>
                                         <a href="viewproduct.php?id='.$row->pid.'" class="btn btn-success" role="button"><span class="glyphicon glyphicon-eye-open" style="color:#ffffff" data-toggle="tooltip" title="View Product"></span></a> 
                                     </td>
