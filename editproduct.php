@@ -21,7 +21,57 @@ $stock_db = $row['pstock'];
 $description_db = $row['pdescription'];
 $productimage_db = $row['pimage'];
 
-//print_r($row);
+if(isset($_POST['btnupdate'])) {
+    $productname_txt = $_POST['txtpname'];
+    $category_txt = $_POST['txtselect_option'];
+    $purchaseprice_txt = $_POST['txtpprice'];
+    $saleprice_txt = $_POST['txtsaleprice'];
+    $stock_txt = $_POST['txtstock'];
+    $description_txt = $_POST['txtdescription'];
+    
+    //variables for file name 
+    $f_name= $_FILES['myfile']['name'];
+    if(!empty($f_name)) {
+        
+    } else {
+        $update = $pdo->prepare("update tbl_product set pname=:pname, pcategory=:pcategory, purchaseprice=:purchaseprice, saleprice=:saleprice, pstock=:pstock, pdescription=:pdescription, pimage=:pimage where pid = $id"); 
+        $update->bindParam(':pname', $productname_txt); 
+        $update->bindParam(':pcategory', $category_txt); 
+        $update->bindParam(':purchaseprice', $purchaseprice_txt); 
+        $update->bindParam(':saleprice', $saleprice_txt); 
+        $update->bindParam(':pstock', $stock_txt); 
+        $update->bindParam(':pdescription', $description_txt); 
+        $update->bindParam(':pimage', $productimage_db);
+        
+        if($update->execute()) {
+            echo '
+            <script type="text/javascript">
+                jQuery(function validation() {
+                    swal({
+                      title: "Updated!!!",
+                      text: "The product is updated successfully.",
+                      icon: "success",
+                      button: "Ok",
+                    });
+                });
+            </script>';  
+        } else {
+            echo '
+            <script type="text/javascript">
+                jQuery(function validation() {
+                    swal({
+                      title: "Error!",
+                      text: "The product is not updated.",
+                      icon: "error",
+                      button: "Ok",
+                    });
+                });
+            </script>'; 
+        }
+    }
+    
+}
+
 ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -97,7 +147,7 @@ $productimage_db = $row['pimage'];
                         <div class="form-group">
                           <label>Product Image</label>
                             <img src="productimages/<?php echo $productimage_db; ?>" class="img-responsive" width="40px" height="40px"/>
-                          <input type="file" class="input-group" name="myfile" required>
+                          <input type="file" class="input-group" name="myfile">
                           <p>upload image</p>
                         </div>
                     </div>
