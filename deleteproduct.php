@@ -1,5 +1,8 @@
 <?php
 include_once'connectdb.php'; 
+if($_SESSION['useremail']=="" OR $_SESSION['role']=='User') {
+    header('location:index.php');
+}
 
 $id = $_POST['pidd']; //from productlist.php ajax
 

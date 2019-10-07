@@ -3,6 +3,9 @@ include_once'connectdb.php';
 
 session_start();
 
+if($_SESSION['useremail']=="" OR $_SESSION['role']=='User') {
+    header('location:index.php');
+}
 
 include_once'header.php';
 ?>
@@ -136,18 +139,6 @@ $(document).ready( function () {
                 swal("Your product is safe!");
               }
             });
-//            alert(id); 
-//            $.ajax({
-//                url: 'deleteproduct.php',
-//                type: 'post', 
-//                data: {
-//                    pidd: id
-//                },
-//                success: function(data) {
-//                    tdh.parents('tr').hide();
-//                }
-//            }); 
-            
             
         });
     });
