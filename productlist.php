@@ -109,17 +109,44 @@ $(document).ready( function () {
         $('.btndelete').click(function() {
             var tdh = $(this); 
             var id = $(this).attr("id"); 
+
+            swal({
+              title: "Are you sure?",
+              text: "Once deleted, you will not be able to recover this product!",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+            })
+            .then((willDelete) => {
+              if (willDelete) {
+                $.ajax({
+                    url: 'deleteproduct.php',
+                    type: 'post', 
+                    data: {
+                        pidd: id
+                    },
+                    success: function(data) {
+                        tdh.parents('tr').hide();
+                    }
+                }); 
+                swal("Poof! Your product has been deleted!", {
+                  icon: "success",
+                });
+              } else {
+                swal("Your product is safe!");
+              }
+            });
 //            alert(id); 
-            $.ajax({
-                url: 'deleteproduct.php',
-                type: 'post', 
-                data: {
-                    pidd: id
-                },
-                success: function(data) {
-                    tdh.parents('tr').hide();
-                }
-            }); 
+//            $.ajax({
+//                url: 'deleteproduct.php',
+//                type: 'post', 
+//                data: {
+//                    pidd: id
+//                },
+//                success: function(data) {
+//                    tdh.parents('tr').hide();
+//                }
+//            }); 
             
             
         });
