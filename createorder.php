@@ -28,7 +28,7 @@ include_once'header.php';
         <div class="box box-warning">
             <form action="" method="post" name="">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Create Order</h3>
+                  <h3 class="box-title">New Order</h3>
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
@@ -56,14 +56,57 @@ include_once'header.php';
                 </div> <!-- for customer and date -->
                 
                 <div class="box-body">
-                    
+                    <div class="col-md-12">
+                        <table id="producttable" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Search Product</th>
+                                    <th>Stock</th>
+                                    <th>Price</th>
+                                    <th>Enter Quantity</th>
+                                    <th>Total</th>
+                                    <th>
+                                        <button type="button" name="add" class="btn btn-success btn-sm btnadd"><span class="glyphicon glyphicon-plus"></span></button> 
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div> <!-- for table -->
                 
                 <div class="box-body">
-                    
+                    <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Subtotal</label>
+                          <input type="text" class="form-control" name="txtsubtotal" required>
+                        </div>
+                        <div class="form-group">
+                          <label>Tax (5%)</label>
+                          <input type="text" class="form-control" name="txttax" required>
+                        </div>
+                        <div class="form-group">
+                          <label>Discount</label>
+                          <input type="text" class="form-control" name="txtdiscount" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Total</label>
+                          <input type="text" class="form-control" name="txttotal" required>
+                        </div>
+                        <div class="form-group">
+                          <label>Paid</label>
+                          <input type="text" class="form-control" name="txtpaid" required>
+                        </div>
+                        <div class="form-group">
+                          <label>Due</label>
+                          <input type="text" class="form-control" name="txtdue" required>
+                        </div>
+                    </div>
                 </div> <!-- for tax, discount, etc -->
             </form>
-        </div>
+        </div>  
    
     </section>
     <!-- /.content -->
