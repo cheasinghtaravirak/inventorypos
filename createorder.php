@@ -71,7 +71,7 @@ include_once'header.php';
                                     <th>Enter Quantity</th>
                                     <th>Total</th>
                                     <th>
-                                        <button type="button" name="add" class="btn btn-success btn-sm btnadd"><span class="glyphicon glyphicon-plus"></span></button> 
+                                       <center><button type="button" name="add" class="btn btn-success btn-sm btnadd"><span class="glyphicon glyphicon-plus"></span></button></center> 
                                     </th>
                                 </tr>
                             </thead>
@@ -152,9 +152,11 @@ include_once'header.php';
                       </div>
                     </div>
                 </div> <!-- for tax, discount, etc -->
+                <hr style="background-color: #f5f5f0; height: 1px; border: 0;">
                 <div align="center">
                     <input type="submit" name="btnsaveorder" value="Save Order" class="btn btn-info">
                 </div>
+                <hr style="background-color: #f5f5f0; height: 1px; border: 0;">
             </form>
         </div>  
    
@@ -173,6 +175,30 @@ include_once'header.php';
       checkboxClass: 'icheckbox_minimal-red',
       radioClass   : 'iradio_minimal-red'
     })
+    
+    //for add (plus sign) button 
+    $(document).ready(function() {
+        $(document).on('click', '.btnadd', function() {
+            var html='';
+            html+='<tr>'; 
+            html+='<td><input type="hidden" class="form-control pname" name="productname[]" readonly></td>';
+            html+='<td><select class="form-control productid" name="productid[]"><option value="">Select Option</option></select></td>';            
+            html+='<td><input type="text" class="form-control stock" name="stock[]" readonly></td>';
+            html+='<td><input type="text" class="form-control price" name="price[]" readonly></td>';
+            html+='<td><input type="text" class="form-control qty" name="qty[]"></td>';
+            html+='<td><input type="text" class="form-control total" name="total[]" readonly></td>';
+            html+='<td><center><button type="button" name="remove" class="btn btn-danger btn-sm btnremove"><span class="glyphicon glyphicon-remove"></span></button></center></td>';
+            
+            $('#producttable').append(html); 
+        });
+    
+        $(document).on('click', '.btnremove', function() {
+            $(this).closest('tr').remove(); 
+        });
+    
+    });
+    
+    
 </script>
 <?php
 include_once'footer.php';
