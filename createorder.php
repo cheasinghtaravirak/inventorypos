@@ -3,6 +3,21 @@ include_once'connectdb.php';
 
 session_start();
 
+function fill_product($pdo) {
+    
+    $output = ''; 
+    $select = $pdo->prepare("select * from tbl_product order by pname asc"); 
+    $select->execute(); 
+    $result=$select->fetchAll(); 
+    
+    foreach($result as $row) {
+        $output .= '<option value="'.$row["pid"].'">'.$row["pname"].'</option>';
+    }
+    
+    return $output; 
+}
+
+
 include_once'header.php';
 ?>
   <!-- Content Wrapper. Contains page content -->
@@ -182,7 +197,7 @@ include_once'header.php';
             var html='';
             html+='<tr>'; 
             html+='<td><input type="hidden" class="form-control pname" name="productname[]" readonly></td>';
-            html+='<td><select class="form-control productid" name="productid[]"><option value="">Select Option</option></select></td>';            
+            html+='<td><select class="form-control productid" name="productid[]"><option value="">Select Option</option><?php echo fill_product($pdo); ?></select></td>';            
             html+='<td><input type="text" class="form-control stock" name="stock[]" readonly></td>';
             html+='<td><input type="text" class="form-control price" name="price[]" readonly></td>';
             html+='<td><input type="text" class="form-control qty" name="qty[]"></td>';
