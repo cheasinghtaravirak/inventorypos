@@ -197,14 +197,17 @@ include_once'header.php';
             var html='';
             html+='<tr>'; 
             html+='<td><input type="hidden" class="form-control pname" name="productname[]" readonly></td>';
-            html+='<td><select class="form-control productid" name="productid[]"><option value="">Select Option</option><?php echo fill_product($pdo); ?></select></td>';            
+            html+='<td><select class="form-control productid" name="productid[]" style="width: 250px;"><option value="">Select Option</option><?php echo fill_product($pdo); ?></select></td>';            
             html+='<td><input type="text" class="form-control stock" name="stock[]" readonly></td>';
             html+='<td><input type="text" class="form-control price" name="price[]" readonly></td>';
             html+='<td><input type="text" class="form-control qty" name="qty[]"></td>';
             html+='<td><input type="text" class="form-control total" name="total[]" readonly></td>';
             html+='<td><center><button type="button" name="remove" class="btn btn-danger btn-sm btnremove"><span class="glyphicon glyphicon-remove"></span></button></center></td>';
             
-            $('#producttable').append(html); 
+            $('#producttable').append(html);
+            
+            //Initialize Select2 Elements
+            $('.productid').select2()
         });
     
         $(document).on('click', '.btnremove', function() {

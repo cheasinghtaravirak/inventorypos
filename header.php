@@ -23,6 +23,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
  
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  
+    <!-- Select2 -->
+  <link rel="stylesheet" href="bower_components/select2/dist/css/select2.min.css">
+  
   <!-- Font Awesome -->
   <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
@@ -62,6 +66,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <link rel="stylesheet" href="plugins/iCheck/all.css">
 <!-- iCheck 1.0.1 -->
 <script src="plugins/iCheck/icheck.min.js"></script>
+
+<!-- Select2 -->
+<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
 
 </head>
 <!--
