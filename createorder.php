@@ -76,21 +76,23 @@ include_once'header.php';
                 
                 <div class="box-body">
                     <div class="col-md-12">
-                        <table id="producttable" class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Search Product</th>
-                                    <th>Stock</th>
-                                    <th>Price</th>
-                                    <th>Enter Quantity</th>
-                                    <th>Total</th>
-                                    <th>
-                                       <center><button type="button" name="add" class="btn btn-success btn-sm btnadd"><span class="glyphicon glyphicon-plus"></span></button></center> 
-                                    </th>
-                                </tr>
-                            </thead>
-                        </table>
+                       <div style="overflow-x:auto;">
+                            <table id="producttable" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Search Product</th>
+                                        <th>Stock</th>
+                                        <th>Price</th>
+                                        <th>Enter Quantity</th>
+                                        <th>Total</th>
+                                        <th>
+                                           <center><button type="button" name="add" class="btn btn-success btn-sm btnadd"><span class="glyphicon glyphicon-plus"></span></button></center> 
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>  
+                       </div>
                     </div>
                 </div> <!-- for table -->
                 
