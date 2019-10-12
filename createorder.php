@@ -210,6 +210,25 @@ include_once'header.php';
             
             //Initialize Select2 Elements
             $('.productid').select2()
+            
+            $('.productid').on('change', function(e) {
+                var productid = this.value; 
+                var tr = $(this).parent().parent(); //select->td->tr
+                $.ajax({
+                    url: "getproduct.php",
+                    method: "get", 
+                    data: {id:productid},
+                    success:function(data) {
+                        //print the response data returned from the getproduct.php
+//                        console.log(data);
+                        tr.find(".stock").val(data["pstock"]);
+                        tr.find(".price").val(data["saleprice"]);
+                        tr.find(".qty").val(1);
+                        tr.find(".total").val(tr.find(".qty").val() * tr.find(".price").val());
+                              
+                    }
+                })
+            })
         });
     
         $(document).on('click', '.btnremove', function() {
