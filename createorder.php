@@ -17,6 +17,59 @@ function fill_product($pdo) {
     return $output; 
 }
 
+if(isset($_POST['btnsaveorder'])) {
+    //for tbl_invoice 
+    $customer_name = $_POST['txtcustomer'];
+    $order_date = date('Y-m-d', strtotime($_POST['orderdate']));  
+    $subtotal = $_POST['txtsubtotal']; 
+    $tax = $_POST['txttax'];
+    $discount = $_POST['txtdiscount']; 
+    $total = $_POST['txttotal']; 
+    $paid = $_POST['txtpaid']; 
+    $due = $_POST['txtdue']; 
+    $payment_type = $_POST['rb']; 
+    //for tbl_invoice_details
+    $arr_productid = $_POST['productid']; 
+    $arr_productname = $_POST['productname']; 
+    $arr_stock = $_POST['stock']; 
+    $arr_qty = $_POST['qty']; 
+    $arr_price = $_POST['price']; 
+    $arr_total = $_POST['total']; 
+    
+    //for tbl_invoice
+    $insert = $pdo->prepare("insert into tbl_invoice(customer_name, order_date, subtotal, tax, discount, total, paid, due, payment_type) values(:cust, :orderdate, :stotal, :tax, :disc, :total, :paid, :due, :ptype)"); 
+    
+    $insert->bindParam(':cust', $customer_name);
+    $insert->bindParam(':orderdate', $order_date);
+    $insert->bindParam(':stotal', $subtotal);
+    $insert->bindParam(':tax', $tax);
+    $insert->bindParam(':disc', $discount);
+    $insert->bindParam(':total', $total);
+    $insert->bindParam(':paid', $paid);
+    $insert->bindParam(':due', $due);
+    $insert->bindParam(':ptype', $payment_type);
+    $insert->execute(); 
+    
+    //for tbl_invoice_details
+    $invoice_id=$pdo->lastInsertId(); 
+    if($invoice_id != null) {
+        for($i=0; $i<count($arr_productid); $i++) {
+            $insert = $pdo->prepare("insert into tbl_invoice_details(invoice_id, product_id, product_name, qty, price, order_date) values(:invid, :pid, :pname, :qty, :price, :orderdate)"); 
+            
+            $insert->bindParam(':invid', $invoice_id);
+            $insert->bindParam(':pid', $arr_productid[$i]);
+            $insert->bindParam(':pname', $arr_productname[$i]);
+            $insert->bindParam(':qty', $arr_qty[$i]);
+            $insert->bindParam(':price', $arr_price[$i]);
+            $insert->bindParam(':orderdate', $order_date);
+            $insert->execute(); 
+             
+        }
+        echo "create order successfully";
+    }
+    
+}
+
 
 include_once'header.php';
 ?>
@@ -221,6 +274,7 @@ include_once'header.php';
                     success:function(data) {
                         //print the response data returned from the getproduct.php
 //                        console.log(data);
+                        tr.find(".pname").val(data["pname"]);
                         tr.find(".stock").val(data["pstock"]);
                         tr.find(".price").val(data["saleprice"]);
                         tr.find(".qty").val(1);
