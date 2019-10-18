@@ -316,9 +316,9 @@ include_once'header.php';
     $(document).ready(function() {
         
         //Initialize Select2 Elements
-        $('.productid').select2()
+        $('.productidedit').select2()
 
-        $('.productid').on('change', function(e) {
+        $('.productidedit').on('change', function(e) {
             var productid = this.value; 
             var tr = $(this).parent().parent(); //select->td->tr
             $.ajax({
@@ -342,7 +342,7 @@ include_once'header.php';
             var html='';
             html+='<tr>'; 
             html+='<td><input type="hidden" class="form-control pname" name="productname[]" readonly></td>';
-            html+='<td><select class="form-control productidedit" name="productid[]" style="width: 250px;"><option value="">Select Option</option><?php echo fill_product($pdo, ''); ?></select></td>';            
+            html+='<td><select class="form-control productid" name="productid[]" style="width: 250px;"><option value="">Select Option</option><?php echo fill_product($pdo, ''); ?></select></td>';            
             html+='<td><input type="text" class="form-control stock" name="stock[]" readonly></td>';
             html+='<td><input type="text" class="form-control price" name="price[]" readonly></td>';
             html+='<td><input type="number" min="1" class="form-control qty" name="qty[]"></td>';
@@ -352,9 +352,9 @@ include_once'header.php';
             $('#producttable').append(html);
             
             //Initialize Select2 Elements
-            $('.productidedit').select2()
+            $('.productid').select2()
             
-            $('.productidedit').on('change', function(e) {
+            $('.productid').on('change', function(e) {
                 var productid = this.value; 
                 var tr = $(this).parent().parent(); //select->td->tr
                 $.ajax({
