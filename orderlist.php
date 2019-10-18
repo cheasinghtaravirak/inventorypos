@@ -28,7 +28,7 @@ include_once'header.php';
         <div class="box box-warning">
             <form action="" method="post" name="">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Blank</h3>
+                  <h3 class="box-title">Order List</h3>
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
@@ -65,7 +65,7 @@ include_once'header.php';
                                                 <td>'.$row->due.'</td>
                                                 <td>'.$row->payment_type.'</td>
                                                 <td>
-                                                    <a href="viewproduct.php?id='.$row->invoice_id.'" class="btn btn-success" role="button"><span class="glyphicon glyphicon-eye-open" style="color:#ffffff" data-toggle="tooltip" title="Print Invoice"></span></a> 
+                                                    <a href="viewproduct.php?id='.$row->invoice_id.'" class="btn btn-warning" role="button"><span class="glyphicon glyphicon-print" style="color:#ffffff" data-toggle="tooltip" title="Print Invoice"></span></a> 
                                                 </td>
                                                 <td>
                                                     <a href="editproduct.php?id='.$row->invoice_id.'" class="btn btn-info" role="button"><span class="glyphicon glyphicon-edit" style="color:#ffffff" data-toggle="tooltip" title="Edit Order"></span></a> 
@@ -88,6 +88,21 @@ include_once'header.php';
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
+<script>
+$(document).ready( function () {
+    $('#orderlisttable').DataTable({
+        "order": [[0, "desc"]]
+    });
+} );
+</script>
+
+<script>
+$(document).ready( function () {
+    $('[data-toggle="tooltip"]').tooltip(); 
+} );
+</script>
+
 <?php
 include_once'footer.php';
 ?>
