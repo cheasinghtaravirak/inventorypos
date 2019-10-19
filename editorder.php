@@ -44,69 +44,48 @@ $row_invoice_details = $select->fetchALL(PDO::FETCH_ASSOC);
 
 
 if(isset($_POST['btnupdateorder'])) {
-    //for tbl_invoice 
-    $customer_name = $_POST['txtcustomer'];
-    $order_date = date('Y-m-d', strtotime($_POST['orderdate']));  
-    $subtotal = $_POST['txtsubtotal']; 
-    $tax = $_POST['txttax'];
-    $discount = $_POST['txtdiscount']; 
-    $total = $_POST['txttotal']; 
-    $paid = $_POST['txtpaid']; 
-    $due = $_POST['txtdue']; 
-    $payment_type = $_POST['rb']; 
-    //for tbl_invoice_details
+    //steps for btnupdateorder button 
+    
+    //1. Get values from text fields and array in variables 
+        //for tbl_invoice 
+    $txt_customer_name = $_POST['txtcustomer'];
+    $txt_order_date = date('Y-m-d', strtotime($_POST['orderdate']));  
+    $txt_subtotal = $_POST['txtsubtotal']; 
+    $txt_tax = $_POST['txttax'];
+    $txt_discount = $_POST['txtdiscount']; 
+    $txt_total = $_POST['txttotal']; 
+    $txt_paid = $_POST['txtpaid']; 
+    $txt_due = $_POST['txtdue']; 
+    $txt_payment_type = $_POST['rb']; 
+        //for tbl_invoice_details
     $arr_productid = $_POST['productid']; 
     $arr_productname = $_POST['productname']; 
     $arr_stock = $_POST['stock']; 
     $arr_qty = $_POST['qty']; 
     $arr_price = $_POST['price']; 
-    $arr_total = $_POST['total']; 
+    $arr_total = $_POST['total'];
+    //2. Write update query for tbl_product stock 
     
-    //for tbl_invoice
-    $insert = $pdo->prepare("insert into tbl_invoice(customer_name, order_date, subtotal, tax, discount, total, paid, due, payment_type) values(:cust, :orderdate, :stotal, :tax, :disc, :total, :paid, :due, :ptype)"); 
-    
-    $insert->bindParam(':cust', $customer_name);
-    $insert->bindParam(':orderdate', $order_date);
-    $insert->bindParam(':stotal', $subtotal);
-    $insert->bindParam(':tax', $tax);
-    $insert->bindParam(':disc', $discount);
-    $insert->bindParam(':total', $total);
-    $insert->bindParam(':paid', $paid);
-    $insert->bindParam(':due', $due);
-    $insert->bindParam(':ptype', $payment_type);
-    $insert->execute(); 
-    
-    //for tbl_invoice_details
-    $invoice_id=$pdo->lastInsertId(); 
-    if($invoice_id != null) {
-        for($i=0; $i<count($arr_productid); $i++) {
-            
-            $rem_qty = $arr_stock[$i] - $arr_qty[$i]; 
-            
-            if($rem_qty < 0) {
-                echo "Order is not completed."; 
-            } else {
-                $update = $pdo->prepare("update tbl_product SET pstock=$rem_qty where pid=$arr_productid[$i]");
-//                $update = $pdo->prepare("update tbl_product SET pstock=:rem_qty where pid=$arr_productid[$i]");
-//                $update->bindParam(':rem_qty', $rem_qty); 
-                $update->execute(); 
-                
-            }
-            
-            $insert = $pdo->prepare("insert into tbl_invoice_details(invoice_id, product_id, product_name, qty, price, order_date) values(:invid, :pid, :pname, :qty, :price, :orderdate)"); 
-            
-            $insert->bindParam(':invid', $invoice_id);
-            $insert->bindParam(':pid', $arr_productid[$i]);
-            $insert->bindParam(':pname', $arr_productname[$i]);
-            $insert->bindParam(':qty', $arr_qty[$i]);
-            $insert->bindParam(':price', $arr_price[$i]);
-            $insert->bindParam(':orderdate', $order_date);
-            $insert->execute(); 
-             
-        }
-//        echo "create order successfully";
-        header('location:orderlist.php'); 
+    foreach($row_invoice_details as $item_invoice_details) {
+        $updateproduct = $pdo->prepare("update tbl_product set pstock=pstock+".$item_invoice_details['qty']." where pid = {$item_invoice_details['product_id']}");
+        $updateproduct->execute(); 
     }
+    
+    //3. Write delete query for tbl_invoice_details table where invoice_id=$id
+    
+    $delete_invoice_details = $pdo->prepare("delete from tbl_invoice_details where invoice_id=$id"); 
+    $delete_invoice_details->execute(); 
+    
+    //4. Write update query for tbl_invoice table data 
+    //5. Write select query for tbl_product table to get out stock value 
+    //6. Write update query for tbl_product table to update stock values 
+    //7. Write insert query for tbl_invoice_details for insert new records. 
+    
+    
+ 
+    
+     
+
     
 }
 
@@ -188,10 +167,7 @@ include_once'header.php';
                                     foreach($row_invoice_details as $item_invoice_details) {
                                         $select = $pdo->prepare("select * from tbl_product where pid = {$item_invoice_details['product_id']}"); 
                                         $select->execute(); 
-                                        $row_product = $select->fetch(PDO::FETCH_ASSOC); 
-                                        
-                                        
-                                    
+                                        $row_product = $select->fetch(PDO::FETCH_ASSOC);   
                                 ?>                                
                                     <tr>
                                         <?php
