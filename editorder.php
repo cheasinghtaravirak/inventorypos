@@ -105,7 +105,7 @@ if(isset($_POST['btnupdateorder'])) {
                 $rem_qty = $db_stock[$i] - $arr_qty[$i]; 
 
                 if($rem_qty < 0) {
-                    echo "Order is not completed."; 
+                    echo "Order is not updated."; 
                 } else {
                     //6. Write update query for tbl_product table to update stock values 
                     $update = $pdo->prepare("update tbl_product SET pstock=$rem_qty where pid=$arr_productid[$i]");
@@ -215,7 +215,7 @@ include_once'header.php';
                                 ?>                                
                                     <tr>
                                         <?php
-                                        echo '<td><input type="hidden" class="form-control pname" name="productname[]" readonly></td>';
+                                        echo '<td><input type="hidden" class="form-control pname" name="productname[]" value="'.$row_product['pname'].'" readonly></td>';
                                         echo '<td><select class="form-control productidedit" name="productid[]" style="width: 250px;"><option value="">Select Option</option>'.fill_product($pdo, $item_invoice_details['product_id']).'></select></td>';            
                                         echo '<td><input type="text" class="form-control stock" name="stock[]" value="'.$row_product['pstock'].'" readonly></td>';
                                         echo '<td><input type="text" class="form-control price" name="price[]" value="'.$row_product['saleprice'].'" readonly></td>';
