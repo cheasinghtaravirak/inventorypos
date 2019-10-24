@@ -64,55 +64,61 @@ $pdf->Cell(30, 8, 'PRICE', 1, 0, 'C', true);
 $pdf->Cell(40, 8, 'TOTAL', 1, 1, 'C', true);
 
 $pdf->SetFont('Arial', '', 12);
-$pdf->Cell(100, 8, 'Iphone', 1, 0, 'L'); //total width = 190 
+$pdf->Cell(100, 8, 'Iphone', 1, 0, 'L'); 
 $pdf->Cell(20, 8, '1', 1, 0, 'C');
 $pdf->Cell(30, 8, '800', 1, 0, 'C');
 $pdf->Cell(40, 8, '800', 1, 1, 'C');
 
 $pdf->SetFont('Arial', '', 12);
-$pdf->Cell(100, 8, 'Iphone', 1, 0, 'L'); //total width = 190 
+$pdf->Cell(100, 8, 'Iphone', 1, 0, 'L');  
 $pdf->Cell(20, 8, '1', 1, 0, 'C');
 $pdf->Cell(30, 8, '800', 1, 0, 'C');
 $pdf->Cell(40, 8, '800', 1, 1, 'C');
 
 $pdf->SetFont('Arial', '', 12);
-$pdf->Cell(100, 8, 'Iphone', 1, 0, 'L'); //total width = 190 
+$pdf->Cell(100, 8, 'Iphone', 1, 0, 'L'); 
 $pdf->Cell(20, 8, '1', 1, 0, 'C');
 $pdf->Cell(30, 8, '800', 1, 0, 'C');
 $pdf->Cell(40, 8, '800', 1, 1, 'C');
 
+//Subtotal
 $pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(100, 8, '', 0, 0, 'L'); //total width = 190 
+$pdf->Cell(100, 8, '', 0, 0, 'L'); 
 $pdf->Cell(20, 8, '', 0, 0, 'C');
 $pdf->Cell(30, 8, 'Subtotal', 1, 0, 'C', true);
 $pdf->Cell(40, 8, '2400', 1, 1, 'C');
 
+//Tax
 $pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(100, 8, '', 0, 0, 'L'); //total width = 190 
+$pdf->Cell(100, 8, '', 0, 0, 'L');  
 $pdf->Cell(20, 8, '', 0, 0, 'C');
 $pdf->Cell(30, 8, 'Tax', 1, 0, 'C', true);
 $pdf->Cell(40, 8, '50', 1, 1, 'C');
 
+//Discount
 $pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(100, 8, '', 0, 0, 'L'); //total width = 190 
+$pdf->Cell(100, 8, '', 0, 0, 'L'); 
 $pdf->Cell(20, 8, '', 0, 0, 'C');
 $pdf->Cell(30, 8, 'Discount', 1, 0, 'C', true);
 $pdf->Cell(40, 8, '50', 1, 1, 'C');
 
+//Grand Total 
 $pdf->SetFont('Arial', 'B', 13);
-$pdf->Cell(100, 8, '', 0, 0, 'L'); //total width = 190 
+$pdf->Cell(100, 8, '', 0, 0, 'L'); 
 $pdf->Cell(20, 8, '', 0, 0, 'C');
 $pdf->Cell(30, 8, 'Grand Total', 1, 0, 'C', true);
 $pdf->Cell(40, 8, '$'.'9000', 1, 1, 'C');
 
+//Paid
 $pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(100, 8, '', 0, 0, 'L'); //total width = 190 
+$pdf->Cell(100, 8, '', 0, 0, 'L'); 
 $pdf->Cell(20, 8, '', 0, 0, 'C');
 $pdf->Cell(30, 8, 'Paid', 1, 0, 'C', true);
 $pdf->Cell(40, 8, '50', 1, 1, 'C');
 
+//Payment Type
 $pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(100, 8, '', 0, 0, 'L'); //total width = 190 
+$pdf->Cell(100, 8, '', 0, 0, 'L');  
 $pdf->Cell(20, 8, '', 0, 0, 'C');
 $pdf->Cell(30, 8, 'Payment Type', 1, 0, 'C', true);
 $pdf->Cell(40, 8, 'Cash', 1, 1, 'C');
