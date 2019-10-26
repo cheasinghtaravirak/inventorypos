@@ -196,6 +196,20 @@ desired effect
         <li><a href="productlist.php"><i class="fa fa-th-list"></i> <span>Product List</span></a></li>
         <li><a href="createorder.php"><i class="fa fa-first-order"></i> <span>Create Order</span></a></li>
         <li><a href="orderlist.php"><i class="fa fa-list-ul"></i> <span>Order List</span></a></li>
+        
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-table"></i> <span>Sales Report</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="tablereport.php"><i class="fa fa-circle-o"></i>Table Report</a></li>
+            <li><a href="graphreport.php"><i class="fa fa-circle-o"></i>Graph Report</a></li>
+          </ul>
+        </li>
+       
         <li><a href="registration.php"><i class="fa fa-registered"></i> <span>Registration</span></a></li>
 <!--
         <li class="treeview">

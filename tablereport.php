@@ -10,7 +10,7 @@ include_once'header.php';
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Admin Dashboard
+        Sales Report - Table Report
         <small></small>
       </h1>
       <ol class="breadcrumb">
