@@ -21,6 +21,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- DataTables -->
 <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="Chart.js-2.9.1/dist/Chart.min.js"></script> 
  
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
   
