@@ -28,7 +28,7 @@ include_once'header.php';
         <div class="box box-warning">
             <form action="" method="post" name="">
                 <div class="box-header with-border">
-                  <h3 class="box-title">From: <?php echo $_POST['date_1'] ?> To <?php echo $_POST['date_1'] ?></h3>
+                  <h3 class="box-title">From: <?php echo $_POST['date_1'] ?> To <?php echo $_POST['date_2'] ?></h3>
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
