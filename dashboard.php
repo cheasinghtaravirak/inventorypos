@@ -188,7 +188,38 @@ include_once'header.php';
                         <!-- form start -->
 
                         <div class="box-body">
-                            <h2>4</h2>
+                            <table id="orderlisttable" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Invoice ID</th>
+                                        <th>Customer Name</th>
+                                        <th>Order Date</th>
+                                        <th>Total</th>
+                                        <th>Payment Type</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php 
+                                    $select = $pdo->prepare("select * from tbl_invoice order by invoice_id desc limit 50"); 
+                                    $select->execute(); 
+                                    while($row=$select->fetch(PDO::FETCH_OBJ)) {
+                                        echo '
+                                            <tr>
+                                                <td><a href="editorder.php?id='.$row->invoice_id.'">'.$row->invoice_id.'</a></td>
+                                                <td>'.$row->customer_name.'</td>
+                                                <td>'.$row->order_date.'</td>
+                                                <td><span class="label label-danger">'."$".$row->total.'</span></td>';
+                                        if($row->payment_type == "Cash") {
+                                            echo '<td><span class="label label-warning">'.$row->payment_type.'</span></td></tr>';
+                                        } else if($row->payment_type == "Card") {
+                                            echo '<td><span class="label label-success">'.$row->payment_type.'</span></td></tr>';
+                                        } else {
+                                            echo '<td><span class="label label-primary">'.$row->payment_type.'</span></td></tr>';
+                                        }
+                                    }
+                                    ?>
+                                </tbody> 
+                            </table>
                         </div>
                      </div>
                 </div>
@@ -224,6 +255,14 @@ var chart = new Chart(ctx, {
 $(document).ready( function () {
     $('#bestsellingproductlist').DataTable({
 //        "order": [[0, "desc"]]
+    });
+} );
+</script>
+
+<script>
+$(document).ready( function () {
+    $('#orderlisttable').DataTable({
+        "order": [[0, "desc"]]
     });
 } );
 </script>
