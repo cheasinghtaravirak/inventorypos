@@ -138,6 +138,61 @@ include_once'header.php';
                   </div>
                 </div>
              </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                          <h3 class="box-title">Best Selling Product</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <!-- form start -->
+
+                        <div class="box-body">
+                            <table id="bestsellingproductlist" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Product ID</th>
+                                        <th>Product Name</th>
+                                        <th>Qty</th>
+                                        <th>Price</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php 
+                                    $select = $pdo->prepare("select product_id, product_name, price, sum(qty) as q, sum(qty*price) as total from tbl_invoice_details group by product_id order by sum(qty) desc limit 30"); 
+                                    $select->execute(); 
+                                    while($row=$select->fetch(PDO::FETCH_OBJ)) {
+                                        echo '
+                                            <tr>
+                                                <td>'.$row->product_id.'</td>
+                                                <td>'.$row->product_name.'</td>
+                                                <td><span class="label label-info">'.$row->q.'</span></td>
+                                                <td><span class="label label-success">'."$".$row->price.'</span></td>
+                                                <td><span class="label label-danger">'."$".$row->total.'</span></td>
+                                            </tr>
+                                        ';
+                                    }
+                                    ?>
+                                </tbody> 
+                            </table>
+                        </div>
+                     </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                          <h3 class="box-title">Recent Orders</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <!-- form start -->
+
+                        <div class="box-body">
+                            <h2>4</h2>
+                        </div>
+                     </div>
+                </div>
+            </div>
         </div>
     </section>
     <!-- /.content -->
@@ -163,6 +218,14 @@ var chart = new Chart(ctx, {
     // Configuration options go here
     options: {}
 });
+</script>
+
+<script>
+$(document).ready( function () {
+    $('#bestsellingproductlist').DataTable({
+//        "order": [[0, "desc"]]
+    });
+} );
 </script>
 
 <?php
