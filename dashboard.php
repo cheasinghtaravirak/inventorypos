@@ -13,6 +13,18 @@ $row = $select->fetch(PDO::FETCH_OBJ);
 $total_order = $row->inv; 
 $net_total = $row->t; 
 
+$select = $pdo->prepare("select order_date, sum(total) as t from tbl_invoice group by order_date LIMIT 30"); 
+$select->execute(); 
+
+$ttl = []; 
+$date = []; 
+while($row=$select->fetch(PDO::FETCH_ASSOC)) {
+    //This function uses array keys as variable names and values as variable values.
+    extract($row); 
+    $ttl[] = $t; //add an element to array $total  
+    $date[] = $order_date; 
+}
+
 include_once'header.php';
 ?>
   <!-- Content Wrapper. Contains page content -->
@@ -113,11 +125,46 @@ include_once'header.php';
             <!-- ./col -->
           </div>
           <!-- /.row -->
+            <div class="box box-warning">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Earning by Date</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+
+                <div class="box-body">
+                  <div class="chart">
+                      <canvas id="earningbydate" style="height: 250px"></canvas>    
+                  </div>
+                </div>
+             </div>
         </div>
     </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+<script>
+var ctx = document.getElementById('earningbydate').getContext('2d');
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+        labels: <?php echo json_encode($date); ?>,
+        datasets: [{
+            label: 'Total Earning',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: <?php echo json_encode($ttl); ?>
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+</script>
+
 <?php
 include_once'footer.php';
 ?>
