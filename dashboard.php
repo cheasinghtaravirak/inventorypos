@@ -160,7 +160,7 @@ include_once'header.php';
                                 </thead>
                                 <tbody>
                                     <?php 
-                                    $select = $pdo->prepare("select product_id, product_name, price, sum(qty) as q, sum(qty*price) as total from tbl_invoice_details group by product_id order by sum(qty) desc limit 30"); 
+                                    $select = $pdo->prepare("select product_id, product_name, price, sum(qty) as q, sum(qty*price) as total from tbl_invoice_details group by product_id order by sum(qty) desc limit 15"); 
                                     $select->execute(); 
                                     while($row=$select->fetch(PDO::FETCH_OBJ)) {
                                         echo '
@@ -200,7 +200,7 @@ include_once'header.php';
                                 </thead>
                                 <tbody>
                                     <?php 
-                                    $select = $pdo->prepare("select * from tbl_invoice order by invoice_id desc limit 50"); 
+                                    $select = $pdo->prepare("select * from tbl_invoice order by invoice_id desc limit 15"); 
                                     $select->execute(); 
                                     while($row=$select->fetch(PDO::FETCH_OBJ)) {
                                         echo '
@@ -251,6 +251,7 @@ var chart = new Chart(ctx, {
 });
 </script>
 
+<!--
 <script>
 $(document).ready( function () {
     $('#bestsellingproductlist').DataTable({
@@ -266,6 +267,7 @@ $(document).ready( function () {
     });
 } );
 </script>
+-->
 
 <?php
 include_once'footer.php';
