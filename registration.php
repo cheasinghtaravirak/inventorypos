@@ -188,7 +188,18 @@ if(isset($_POST['btnupdate'])) {
             <form role="form" action="" method="post">
               <div class="box-body">
               
-                <?php 
+                <?php
+                  function fill_role($role) {
+
+                      $output = ''; 
+
+                      if($role == "Admin") {
+                          $output .= '<option>User</option><option selected>Admin</option>';
+                      } else {
+                          $output .= '<option selected>User</option><option>Admin</option>';
+                      }
+                      return $output; 
+                  }
                 //codes for edit button
                 if(isset($_POST['btnedit'])) {
                     $select = $pdo->prepare("select * from tbl_user where userid=".$_POST['btnedit']);
@@ -212,10 +223,9 @@ if(isset($_POST['btnupdate'])) {
                                 </div>
                                 <div class="form-group">
                                   <label>Role</label>
-                                  <select class="form-control" name="txtselect_option" >
-                                    <option value="" disabled selected>Select role</option>
-                                    <option>User</option>
-                                    <option>Admin</option>
+                                  <select class="form-control" name="txtselect_option">
+                                    <option value="">Select role</option>
+                                    '.fill_role($row->role).'
                                   </select>
                                 </div>
                                 <button type="submit" class="btn btn-info" name="btnupdate">Update</button>
