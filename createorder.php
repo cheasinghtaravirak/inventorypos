@@ -3,7 +3,7 @@ include_once'connectdb.php';
 
 session_start();
 
-if($_SESSION['useremail']=="" OR $_SESSION['role']=='User') {
+if($_SESSION['useremail']=="" OR $_SESSION['role']=='') {
     header('location:index.php');
 }
 
@@ -88,8 +88,12 @@ if(isset($_POST['btnsaveorder'])) {
     
 }
 
+if($_SESSION['role'] == "Admin") {
+    include_once'header.php';
+} else {
+    include_once'headeruser.php';
+}
 
-include_once'header.php';
 ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
