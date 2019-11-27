@@ -27,12 +27,12 @@ $pdf->AddPage();
 $pdf->SetFont('Arial', 'B', 16); 
 //Cell(width, height, text, border, end line, align);
 //align: 0->right, 1->next line, 2->below 
-$pdf->Cell(60, 8, 'CYBARG Inc.', 1, 1, 'C'); //to right
+$pdf->Cell(60, 8, 'MyPOS Inc.', 1, 1, 'C'); //to right
 $pdf->SetFont('Arial', 'B', 8);
-$pdf->Cell(60, 5, 'Address: Progress way, New York - USA', 0, 1, 'C');
+$pdf->Cell(60, 5, 'Address: St 271, Boeng Tumpun, Phnom Penh - Cambodia', 0, 1, 'C');
 $pdf->Cell(60, 5, 'Phone Number: (+855)11-725-322', 0, 1, '');
 $pdf->Cell(60, 5, 'Email Adress: singhtaravirak@gmail.com', 0, 1, 'C');
-$pdf->Cell(60, 5, 'Website: www.cybarg.com', 0, 1, 'C');
+$pdf->Cell(60, 5, 'Website: www.mypos.com', 0, 1, 'C');
 
 //Line(x1, y1, x2, y2) 
 $pdf->Line(7, 38, 72, 38);
@@ -95,7 +95,7 @@ $pdf->Cell(20, 5, $row->tax, 1, 1, 'C');
 $pdf->SetX(7); 
 $pdf->SetFont('Courier', 'B', 8);
 $pdf->Cell(20, 5, '', 0, 0, 'L'); 
-$pdf->Cell(25, 5, 'DSICOUNT', 1, 0, 'C');
+$pdf->Cell(25, 5, 'DISCOUNT', 1, 0, 'C');
 $pdf->Cell(20, 5, $row->discount, 1, 1, 'C');
 
 //Total
